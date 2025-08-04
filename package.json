@@ -1,0 +1,35 @@
+{
+  "devDependencies": {
+    "@types/node": "^24.2.0"
+  },
+  "name": "spotify-data-tansformation-and-analysis",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "aws-sdk": "^2.1692.0",
+    "axios": "^1.11.0",
+    "csv-parser": "^3.2.0",
+    "dotenv": "^17.2.1",
+    "fast-csv": "^5.0.5",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7",
+    "undici-types": "^7.10.0",
+    "unzipper": "^0.12.3",
+    "url": "^0.11.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cypresshill98/spotify-data-tansformation-and-analysis.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cypresshill98/spotify-data-tansformation-and-analysis/issues"
+  },
+  "homepage": "https://github.com/cypresshill98/spotify-data-tansformation-and-analysis#readme"
+}
