@@ -30,10 +30,11 @@
 5. Before running the project you need to register or login to Kaggle account, then go to account settings - create API key and then download kaggle.json file. File will contain your Kaggle username and API key.
 
 6. Create .env file and insert KAGGLE_USERNAME and KAGGLE_KEY values. Values should look like this:
-KAGGLE_USERNAME=YourUsername
-KAGGLE_KEY=YourKey
 
-7. To upload filtered data files to your AWS S3 bucket you need to insert your .env file bucket name, AWS access key id, AWS secret access key and AWS region where your bucket is located. You can find AWS access key id and AWS secret access key values by going to IAM -> selecting your user -> Security credentials -> Access keys.
+       KAGGLE_USERNAME=YourUsername
+       KAGGLE_KEY=YourKey
+
+8. To upload filtered data files to your AWS S3 bucket you need to insert your .env file bucket name, AWS access key id, AWS secret access key and AWS region where your bucket is located. You can find AWS access key id and AWS secret access key values by going to IAM -> selecting your user -> Security credentials -> Access keys.
 Make sure that your AWS user has permissions policies to access your S3 bucket. Your .env file should look like this:
 
         # Your created bucket name in AWS S3
@@ -51,26 +52,28 @@ Make sure that your AWS user has permissions policies to access your S3 bucket. 
         KAGGLE_USERNAME=YourKaggleUsername
         KAGGLE_KEY=YourKaggleKey
 
-8. Run node.js project with this command:
-node index.ts
+9. Run node.js project with this command:
 
-9. Node.js project will download artists.csv and tracks.csv datasets, filter out records to meet specific criteria, format and structure the data as needed for analysis, and upload filtered csv files to your S3 bucket.
+       node index.ts
 
-10. If needed download AWS CLI from: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html.
+11. Node.js project will download artists.csv and tracks.csv datasets, filter out records to meet specific criteria, format and structure the data as needed for analysis, and upload filtered csv files to your S3 bucket.
 
-11. Run this command to configure your aws cli:
-aws configure  
+12. If needed download AWS CLI from: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html.
 
-12. Download csv files from your S3 bucket by running these commands:
+13. Run this command to configure your aws cli:
+
+              aws configure  
+
+15. Download csv files from your S3 bucket by running these commands:
 
         aws s3 cp s3://spotify-data-filtered/artists.csv D:\S3data\artists.csv
         aws s3 cp s3://spotify-data-filtered/tracks.csv D:\S3data\tracks.csv
 
-14. Create new database for your local postgresql. Or just use existing one:
+16. Create new database for your local postgresql. Or just use existing one:
 
         CREATE DATABASE spotifydata;
 
-15. Create tables where the data will be stored.
+17. Create tables where the data will be stored.
 
         CREATE TABLE IF NOT EXISTS artists_stage (
           id VARCHAR PRIMARY KEY,
@@ -140,7 +143,7 @@ aws configure
           release_day INT
           );
 
-16. Import csv files that were downloaded from your S3 bucket:
+18. Import csv files that were downloaded from your S3 bucket:
 
         TRUNCATE TABLE artists_stage;
         TRUNCATE TABLE tracks_stage;
@@ -153,7 +156,7 @@ aws configure
           release_year,release_month,release_day)
         FROM 'D:/s3data/tracks.csv' DELIMITER ',' CSV HEADER;
 
-17. Insert data from stage  tables:
+19. Insert data from stage  tables:
 
         INSERT INTO artists
         SELECT * FROM artists_stage;
@@ -161,7 +164,7 @@ aws configure
         INSERT INTO tracks
         SELECT * FROM tracks_stage;
 
-18. Create SQL views that perform the following tasks on the data stored:
+20. Create SQL views that perform the following tasks on the data stored:
 
 ■Take track: id, name, popularity, energy, danceability (Low, Medium, High); and
 number of artist followers;
